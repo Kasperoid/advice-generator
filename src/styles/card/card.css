@@ -1,0 +1,38 @@
+.ant-card {
+  position: "relative";
+  background-color: hsl(218, 20%, 24%);
+  width: 550px;
+}
+.ant-card .ant-card-body {
+  padding: 45px;
+}
+@media screen and (max-width: 375px) {
+  .ant-card .ant-card-body {
+    padding: 45px 25px;
+  }
+}
+.ant-card .body-card-text {
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
+}
+.ant-card .header-card-text {
+  letter-spacing: 4px;
+  font-weight: 800;
+  font-size: 12px;
+}
+.ant-card .custom-stick {
+  width: 5px;
+  height: 13px;
+  background-color: hsl(193, 38%, 86%);
+  border-radius: 25%;
+}
+.ant-card .ant-btn.ant-btn-circle {
+  padding: 30px;
+}
+.ant-card .random-card-btn {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}/*# sourceMappingURL=card.css.map */
