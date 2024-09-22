@@ -1,20 +1,31 @@
-import React from 'react';
 import { Card, Divider, Flex, Typography, Button } from 'antd';
 import { AdviceType } from '../types/advice';
 import { DiceIcon } from './Icons';
+import { useSWRConfig } from 'swr';
+import { FETCH_URL } from '../constants/constants';
+import { fetcher } from '../helpers/fetcher';
+import { useState } from 'react';
 
 interface AdviceCardContainerProps extends Partial<AdviceType['slip']> {
   loading: boolean;
-  fetchData: () => Promise<void>;
 }
 
 const AdviceCardContainer = ({
   id,
   advice,
   loading,
-  fetchData,
 }: AdviceCardContainerProps) => {
+  const onClickRandomBtn = () => {
+    mutate(FETCH_URL, fetcher(FETCH_URL));
+    setBlockBtn(true);
+    const timer = setTimeout(() => {
+      setBlockBtn(false);
+      clearTimeout(timer);
+    }, 1500);
+  };
   const { Paragraph } = Typography;
+  const [blockBtn, setBlockBtn] = useState<boolean>(false);
+  const { mutate } = useSWRConfig();
   return (
     <Card loading={loading} bordered={false}>
       <Flex vertical align="center">
@@ -30,11 +41,12 @@ const AdviceCardContainer = ({
         </Flex>
       </Divider>
       <Button
+        disabled={blockBtn}
         className="random-card-btn"
         type="primary"
         shape="circle"
         icon={<DiceIcon />}
-        onClick={() => fetchData()}
+        onClick={() => onClickRandomBtn()}
       />
     </Card>
   );
