@@ -1,4 +1,4 @@
-import { Card, Divider, Flex, Typography, Button } from 'antd';
+import { Flex } from 'antd';
 import { AdviceType } from '../types/advice';
 import { DiceIcon } from './Icons';
 import { useSWRConfig } from 'swr';
@@ -6,6 +6,12 @@ import { FETCH_URL } from '../constants/constants';
 import { fetcher } from '../helpers/fetcher';
 import { useState } from 'react';
 import { CardContainer } from '../styles/card/CardContainer';
+import { CardContainerInner } from '../styles/card/CardContainerInner';
+import { CardTitleStyled } from '../styles/card/CardTitleStyled';
+import { CardTextStyled } from '../styles/card/CardTextStyled';
+import { DividerCardStyled } from '../styles/card/DividerCardStyled';
+import { DividerStickStyled } from '../styles/card/DividerStickStyled';
+import { RandomCardBtnStyled } from '../styles/card/RandomCardBtnStyled';
 
 interface AdviceCardContainerProps extends Partial<AdviceType['slip']> {
   loading: boolean;
@@ -24,33 +30,27 @@ const AdviceCardContainer = ({
       clearTimeout(timer);
     }, 1500);
   };
-  const { Paragraph } = Typography;
   const [blockBtn, setBlockBtn] = useState<boolean>(false);
   const { mutate } = useSWRConfig();
   return (
     <CardContainer justify="center" align="center">
-      <Card loading={loading} bordered={false}>
+      <CardContainerInner loading={loading} bordered={false}>
         <Flex vertical align="center">
-          <Paragraph type="secondary" className="header-card-text">
-            ADVICE #{id}
-          </Paragraph>
-          <Paragraph className="body-card-text">{advice}</Paragraph>
+          <CardTitleStyled>ADVICE #{id}</CardTitleStyled>
+          <CardTextStyled className="body-card-text">{advice}</CardTextStyled>
         </Flex>
-        <Divider style={{ borderColor: 'hsl(193, 38%, 86%)' }}>
+        <DividerCardStyled>
           <Flex gap={6}>
-            <div className="custom-stick" />
-            <div className="custom-stick" />
+            <DividerStickStyled />
+            <DividerStickStyled />
           </Flex>
-        </Divider>
-        <Button
+        </DividerCardStyled>
+        <RandomCardBtnStyled
           disabled={blockBtn}
-          className="random-card-btn"
-          type="primary"
-          shape="circle"
           icon={<DiceIcon />}
           onClick={() => onClickRandomBtn()}
         />
-      </Card>
+      </CardContainerInner>
     </CardContainer>
   );
 };
