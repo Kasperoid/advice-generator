@@ -1,40 +1,24 @@
-import React, { useEffect, useState } from 'react';
 import { Layout, Flex } from 'antd';
+import { FETCH_URL } from './constants/constants';
+import useSWR from 'swr';
+import { fetcher } from './helpers/fetcher';
 import AdviceCardContainer from './components/AdviceCardContainer';
 import { AdviceType } from './types/advice';
-import { FETCH_URL } from './constants/constants';
-import { isAdvice } from './helpers/typeGuard';
 
 function App() {
   const { Content } = Layout;
-  const [advice, setAdvice] = useState<AdviceType | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { data, isLoading } = useSWR<AdviceType>(FETCH_URL, fetcher);
 
-  const fetchData = async () => {
-    setLoading(true);
-    const response = await fetch(FETCH_URL);
-    const data = (await response.json()) as AdviceType;
-    if (isAdvice(data)) {
-      setAdvice(data);
-    } else {
-      setAdvice(null);
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  console.log(isLoading);
 
   return (
     <Layout>
       <Content>
         <Flex justify="center" align="center">
           <AdviceCardContainer
-            id={advice?.slip.id}
-            advice={advice?.slip.advice}
-            loading={loading}
-            fetchData={fetchData}
+            id={data?.slip.id}
+            advice={data?.slip.advice}
+            loading={isLoading}
           />
         </Flex>
       </Content>
