@@ -1,1 +1,1 @@
-export const FETCH_URL: string = 'https://api.adviceslip.com/advice'
+export const FETCH_URL: string = 'https://api.adviceslip.com/advice';
