@@ -5,12 +5,19 @@ import 'normalize.css';
 import './styles/app/app.css';
 import './styles/card/card.css';
 import './styles/main/main.css';
+import { SWRConfig } from 'swr';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <SWRConfig
+    value={{
+      refreshInterval: 0,
+    }}
+  >
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </SWRConfig>
 );
