@@ -9,8 +9,6 @@ function App() {
   const { Content } = Layout;
   const { data, isLoading } = useSWR<AdviceType>(FETCH_URL, fetcher);
 
-  console.log(isLoading);
-
   return (
     <Layout>
       <Content>
