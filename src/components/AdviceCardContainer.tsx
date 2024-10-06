@@ -23,7 +23,7 @@ const AdviceCardContainer = ({
   loading,
 }: AdviceCardContainerProps) => {
   const onClickRandomBtn = () => {
-    mutate(FETCH_URL, fetcher(FETCH_URL));
+    mutate(FETCH_URL, fetcher(FETCH_URL), { revalidate: false });
     setBlockBtn(true);
     const timer = setTimeout(() => {
       setBlockBtn(false);

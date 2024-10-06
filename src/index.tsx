@@ -12,6 +12,9 @@ root.render(
   <SWRConfig
     value={{
       refreshInterval: 0,
+      revalidateIfStale: false,
+      revalidateOnReconnect: false,
+      revalidateOnFocus: false,
     }}
   >
     <React.StrictMode>
