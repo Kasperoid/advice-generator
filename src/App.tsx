@@ -7,12 +7,7 @@ import { LayoutStyled } from './styles/app/LayoutStyled';
 import { ContentStyled } from './styles/app/ContentStyled';
 
 function App() {
-  const { data, isLoading } = useSWR<AdviceType>(FETCH_URL, fetcher, {
-    revalidateOnReconnect: false,
-    revalidateOnMount: false,
-    revalidateOnFocus: false,
-    revalidateIfStale: false,
-  });
+  const { data, isLoading } = useSWR<AdviceType>(FETCH_URL, fetcher);
 
   return (
     <LayoutStyled>
